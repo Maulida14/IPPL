@@ -1,0 +1,8 @@
+# Mengabaikan file yang berisi variabel rahasia
+.env
+
+# Mengabaikan folder dependensi (ukurannya besar dan bisa diinstal ulang)
+node_modules/
+
+# Mengabaikan folder untuk file upload sementara
+uploads/

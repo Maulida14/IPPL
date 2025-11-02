@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CV Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 AI CV Analyzer</h1>
+            <p>Unggah CV Anda (PDF atau DOCX) untuk mendapatkan skor kecocokan dengan pekerjaan, analisis skill, dan saran perbaikan.</p>
+        </header>
+
+        <button id="btn-panduan" class="btn-panduan">📘 Panduan Pengguna</button>
+
+        <div id="modal-panduan" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Panduan Pengguna</h2>
+                <ol>
+                    <li>Pilih posisi pekerjaan yang ingin dianalisis.</li>
+                    <li>Unggah file CV dalam format PDF atau DOCX.</li>
+                    <li>Klik tombol <b>“Analisis CV Saya”</b>.</li>
+                    <li>Tunggu hingga hasil analisis muncul yang mencakup:
+                        <ul>
+                            <li>Skor kecocokan</li>
+                            <li>Skill yang cocok dan yang perlu ditingkatkan</li>
+                            <li>Saran perbaikan CV</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+        <main>
+            <form id="cv-form">
+                <div class="form-group">
+                    <label for="job-title">Pilih Posisi Pekerjaan:</label>
+                    <select name="jobTitle" id="job-title" required>
+                        <option value="" disabled selected>-- Pilih Posisi --</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Data Scientist">Data Scientist</option>
+                        <option value="Frontend Developer">Frontend Developer</option>
+                        <option value="Backend Developer">Backend Developer</option>    
+                        <option value="UI/UX Designer">UI/UX Designer</option>
+                        <option value="Fullstack Developer">Fullstack Developer</option>
+                    </select>
+                </div>
+                
+                <div class="file-upload-wrapper">
+                    <input type="file" id="cv-file" name="CV" accept=".pdf,.docx" required>
+                    <label for="cv-file" class="file-upload-label">
+                        <span>Pilih File CV...</span>
+                    </label>
+                    <span id="file-name" class="file-name-display"></span>
+                </div>
+                <button type="submit" id="analyze-btn">Analisis CV Saya</button>
+            </form>
+
+            <div id="loader" class="hidden">
+                <div class="spinner"></div>
+                <p>Menganalisis CV Anda, mohon tunggu...</p>
+            </div>
+
+            <div id="error-message" class="hidden"></div>
+
+            <section id="results-container" class="hidden">
+                <h2>Hasil Analisis</h2>
+                <div class="results-grid">
+                    <div class="score-card">
+                        <h3>Skor Kecocokan</h3>
+                        <div class="score-circle" role="progressbar" aria-valuenow="0" style="--p:0;--c:orange;">
+                            <span id="score-value">0%</span>
+                        </div>
+                    </div>
+                    <div class="details-card">
+                        <h3>Detail Skill</h3>
+                        <div class="skills-section">
+                            <h4>✅ Skill yang Cocok</h4>
+                            <ul id="matched-skills-list"></ul>
+                        </div>
+                        <div class="skills-section">
+                            <h4>❌ Skill yang Kurang</h4>
+                            <ul id="missing-skills-list"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="suggestions-card">
+                    <h3>💡 Saran Perbaikan</h3>
+                    <p id="suggestions-text"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

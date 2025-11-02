@@ -1,0 +1,74 @@
+{
+  "Frontend Developer": {
+    "title": "Frontend Developer",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Vue.js",
+      "Angular",
+      "TypeScript",
+      "Webpack",
+      "Git"
+    ]
+  },
+  "Backend Developer": {
+    "title": "Backend Developer",
+    "skills": [
+      "Node.js",
+      "Python",
+      "Java",
+      "Go",
+      "Express.js",
+      "SQL",
+      "MongoDB",
+      "PostgreSQL",
+      "REST API",
+      "GraphQL",
+      "Docker"
+    ]
+  },
+  "Fullstack Developer": {
+    "title": "Fullstack Developer",
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "SQL",
+      "MongoDB",
+      "REST API",
+      "Git",
+      "Docker",
+      "TypeScript"
+    ]
+  },
+  "Data Scientist": {
+    "title": "Data Scientist",
+    "skills": [
+      "Python",
+      "SQL",
+      "Machine Learning",
+      "Deep Learning",
+      "TensorFlow",
+      "PyTorch",
+      "Pandas",
+      "Scikit-learn",
+      "Statistika"
+    ]
+  },
+  "UI/UX Designer": {
+    "title": "UI/UX Designer",
+    "skills": [
+      "Figma",
+      "Adobe XD",
+      "Sketch",
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "User Journey Mapping",
+      "Design System"
+    ]
+  }
+
+}
