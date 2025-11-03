@@ -7,9 +7,72 @@ document.addEventListener("DOMContentLoaded", () => {
     const loader = document.getElementById("loader");
     const errorMessage = document.getElementById("error-message");
     const resultsContainer = document.getElementById("results-container");
+    const cancelFileBtn = document.getElementById("cancel-file");
+    const resetBtn = document.getElementById("reset-btn");
 
     // BARU: Ambil elemen select
     const jobTitleSelect = document.getElementById("job-title");
+    const positions = [
+        "AI Engineer",
+        "AR/VR Developer",
+        "Backend Developer",
+        "Blockchain Developer",
+        "Business Analyst",
+        "Business Intelligence Developer",
+        "Cloud Engineer",
+        "Cloud Security Engineer",
+        "Computer Vision Engineer",
+        "Cybersecurity Analyst",
+        "Data Engineer",
+        "Data Scientist",
+        "Database Administrator (DBA)",
+        "DevOps Engineer",
+        "Digital Forensics Analyst",
+        "Embedded Systems Engineer",
+        "Firmware Engineer",
+        "Frontend Developer",
+        "Fullstack Developer",
+        "Game Developer",
+        "IT Consultant",
+        "IT Manager",
+        "IT Support Specialist",
+        "Interaction Designer",
+        "Machine Learning Engineer",
+        "Mobile Developer",
+        "Network Engineer",
+        "NLP Engineer",
+        "Penetration Tester (Ethical Hacker)",
+        "Product Manager",
+        "QA Engineer",
+        "Quantum Engineer",
+        "Robotics Engineer",
+        "Scrum Master",
+        "Security Architect",
+        "Site Reliability Engineer (SRE)",
+        "Software Engineer",
+        "Solutions Architect",
+        "System Administrator",
+        "Technical Lead",
+        "Technical Project Manager",
+        "Technical Writer",
+        "UI/UX Designer",
+        "UX Researcher"
+    ];
+    positions.sort();
+
+    jobTitleSelect.innerHTML = `<option value="">--Pilih Posisi--</option>` ;
+    positions.forEach(position => {
+        const option = document.createElement("option");
+        option.value = position;
+        option.textContent = position;
+        jobTitleSelect.appendChild(option);
+    });
+
+    $(document).ready(function() {
+        $('#job-title').select2({
+            placeholder: "--Pilih Posisi--", allowClear: true 
+        }); 
+    });
 
     // Result display elements
     const scoreValue = document.getElementById("score-value");
@@ -22,9 +85,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const API_URL = "http://localhost:3000/api/analyze-cv";
 
     // === Event Listeners ===
-    cvFileInput.addEventListener("change", () => {
-        fileNameDisplay.textContent = cvFileInput.files.length > 0 ? cvFileInput.files[0].name : "";
-    });
+    cvFileInput.addEventListener("change", () => {  
+        if (cvFileInput.files.length > 0) {  
+            fileNameDisplay.textContent = cvFileInput.files[0].name;  
+            cancelFileBtn?.classList.remove("hidden"); 
+        } else {  
+            fileNameDisplay.textContent = "";  
+            cancelFileBtn?.classList.add("hidden");  
+        }  
+        });
+
+    if (cancelFileBtn) {
+        cancelFileBtn.addEventListener("click", () => {
+            cvFileInput.value = "";
+            fileNameDisplay.textContent = "";
+            cancelFileBtn.classList.add("hidden");
+        });
+    }
 
     cvForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -92,21 +169,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function displayResults(data) {
-        scoreValue.textContent = `${data.score}%`;
-        scoreCircle.style.setProperty('--p', data.score);
-        scoreCircle.setAttribute('aria-valuenow', data.score);
+    // Animasi skor
+    let currentScore = 0;
+    const targetScore = data.score;
+    const duration = 1000;
+    const startTime = performance.now();
 
-        let scoreColor = '#dc3545';
-        if (data.score >= 75) scoreColor = '#28a745';
-        else if (data.score >= 50) scoreColor = '#ffc107';
-        scoreCircle.style.setProperty('--c', scoreColor);
+    function animateScore(timestamp) {
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        currentScore = Math.floor(progress * targetScore);
+        scoreValue.textContent = `${currentScore}%`;
+        scoreCircle.style.setProperty('--p', currentScore);
+        if (progress < 1) {
+            requestAnimationFrame(animateScore);
+        }
+    }
+    requestAnimationFrame(animateScore);
 
-        updateSkillList(matchedSkillsList, data.matchedSkills, "Semua skill yang dibutuhkan cocok!");
-        updateSkillList(missingSkillsList, data.missingSkills, "Tidak ada skill yang kurang.");
+    // Ubah warna lingkaran
+    let scoreColor = '#dc3545';
+    if (data.score >= 75) scoreColor = '#28a745';
+    else if (data.score >= 50) scoreColor = '#ffc107';
+    scoreCircle.style.setProperty('--c', scoreColor);
 
-        suggestionsText.textContent = data.suggestions;
+    updateSkillList(matchedSkillsList, data.matchedSkills, "Semua skill yang dibutuhkan cocok!");
+    updateSkillList(missingSkillsList, data.missingSkills, "Tidak ada skill yang kurang.");
 
-        resultsContainer.classList.remove("hidden");
+    suggestionsText.textContent = data.suggestions;
+
+    resultsContainer.classList.remove("hidden");
+
+    // Tampilkan animasi fade-in
+    document.querySelectorAll(".fade-in").forEach((el, i) => {
+        setTimeout(() => el.classList.add("visible"), i * 250);
+    });
+
+    // Tampilkan tombol reset
+    document.getElementById("reset-btn").classList.remove("hidden");
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            document.getElementById("results-container").classList.add("hidden");
+            document.getElementById("error-message").classList.add("hidden");
+            document.getElementById("cv-form").reset();
+            document.getElementById("file-name").textContent = "";
+            resetBtn.classList.add("hidden");
+        });
+}
     }
 
     function updateSkillList(listElement, skills, emptyMessage) {
@@ -127,20 +235,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // === Interaksi Modal Panduan Pengguna ===
-const btnPanduan = document.getElementById("btn-panduan");
-const modalPanduan = document.getElementById("modal-panduan");
-const closeBtn = document.querySelector(".close");
+document.addEventListener("DOMContentLoaded", () => {
+    const btnPanduan = document.getElementById("btn-panduan");
+    const modalPanduan = document.getElementById("modal-panduan");
+    const closeBtn = document.querySelector(".close");
 
-btnPanduan.addEventListener("click", () => {
-    modalPanduan.classList.remove("hidden");
-});
+    btnPanduan.addEventListener("click", () => {
+        modalPanduan.classList.remove("hidden");
+    });
 
-closeBtn.addEventListener("click", () => {
-    modalPanduan.classList.add("hidden");
-});
-
-window.addEventListener("click", (event) => {
-    if (event.target === modalPanduan) {
+    closeBtn.addEventListener("click", () => {
         modalPanduan.classList.add("hidden");
-    }
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modalPanduan) {
+            modalPanduan.classList.add("hidden");
+        }
+    });
 });
+

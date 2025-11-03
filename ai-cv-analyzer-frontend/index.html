@@ -8,15 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📄 AI CV Analyzer</h1>
             <p>Unggah CV Anda (PDF atau DOCX) untuk mendapatkan skor kecocokan dengan pekerjaan, analisis skill, dan saran perbaikan.</p>
+            <button id="btn-panduan" class="btn-panduan">📘 Panduan Pengguna</button>
         </header>
-
-        <button id="btn-panduan" class="btn-panduan">📘 Panduan Pengguna</button>
 
         <div id="modal-panduan" class="modal hidden">
             <div class="modal-content">
@@ -97,6 +101,7 @@
                         <span>Pilih File CV...</span>
                     </label>
                     <span id="file-name" class="file-name-display"></span>
+                    <button type="button" id="cancel-file" class="cancel-file hidden">✖</button>
                 </div>
                 <button type="submit" id="analyze-btn">Analisis CV Saya</button>
             </form>
@@ -108,7 +113,7 @@
 
             <div id="error-message" class="hidden"></div>
 
-            <section id="results-container" class="hidden">
+            <section id="results-container" class="hidden fade-in">
                 <h2>Hasil Analisis</h2>
                 <div class="results-grid">
                     <div class="score-card">
@@ -133,6 +138,7 @@
                     <h3>💡 Saran Perbaikan</h3>
                     <p id="suggestions-text"></p>
                 </div>
+                <button type="button" class="reset-btn hidden" id="reset-btn">🔄 Reset Analisis</button>
             </section>
         </main>
     </div>
