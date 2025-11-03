@@ -69,6 +69,521 @@
       "User Journey Mapping",
       "Design System"
     ]
+  },
+  "Data Engineer": {
+    "title": "Data Engineer",
+    "skills": [
+      "SQL",
+      "Python",
+      "ETL",
+      "Apache Spark",
+      "Apache Kafka",
+      "Data Warehousing",
+      "BigQuery",
+      "Snowflake",
+      "Airflow",
+      "Hadoop"
+    ]
+  },
+  "DevOps Engineer": {
+    "title": "DevOps Engineer",
+    "skills": [
+      "CI/CD",
+      "Jenkins",
+      "GitLab CI",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Ansible",
+      "AWS",
+      "Azure",
+      "Linux",
+      "Scripting (Bash/Python)"
+    ]
+  },
+  "Cybersecurity Analyst": {
+    "title": "Cybersecurity Analyst",
+    "skills": [
+      "Network Security",
+      "SIEM",
+      "Penetration Testing",
+      "Cryptography",
+      "Firewalls",
+      "Incident Response",
+      "IAM (Identity Access Management)",
+      "Compliance (ISO 27001/NIST)"
+    ]
+  },
+  "Mobile Developer": {
+    "title": "Mobile Developer",
+    "skills": [
+      "Kotlin (Android)",
+      "Swift (iOS)",
+      "React Native",
+      "Flutter",
+      "Java",
+      "Git",
+      "REST API",
+      "Mobile UI/UX Principles"
+    ]
+  },
+  "Cloud Engineer": {
+    "title": "Cloud Engineer",
+    "skills": [
+      "AWS",
+      "Azure",
+      "Google Cloud Platform (GCP)",
+      "Networking",
+      "IAM",
+      "Terraform",
+      "Kubernetes",
+      "Cloud Security",
+      "Linux"
+    ]
+  },
+  "Machine Learning Engineer": {
+    "title": "Machine Learning Engineer",
+    "skills": [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Data Preprocessing",
+      "Model Deployment",
+      "Docker",
+      "Kubernetes",
+      "SQL",
+      "Cloud ML Services (AWS Sagemaker, GCP AI Platform)"
+    ]
+  },
+  "QA Engineer": {
+    "title": "QA Engineer",
+    "skills": [
+      "Manual Testing",
+      "Automated Testing",
+      "Selenium",
+      "Jest",
+      "Cypress",
+      "Test Planning",
+      "Bug Tracking (JIRA)",
+      "Performance Testing",
+      "API Testing (Postman)"
+    ]
+  },
+  "System Administrator": {
+    "title": "System Administrator",
+    "skills": [
+      "Linux/Windows Server Management",
+      "Networking",
+      "Shell Scripting",
+      "Active Directory",
+      "Virtualization (VMware, Hyper-V)",
+      "Backup and Recovery",
+      "Monitoring Tools (Nagios, Zabbix)",
+      "Security Best Practices"
+    ]
+  },
+  "Business Analyst": {
+    "title": "Business Analyst",
+    "skills": [
+      "Requirement Gathering",
+      "Process Modeling",
+      "Data Analysis",
+      "Stakeholder Communication",
+      "UML",
+      "Agile Methodologies",
+      "JIRA",
+      "Documentation Skills"
+    ]
+  },
+  "Network Engineer": {
+    "title": "Network Engineer",
+    "skills": [
+      "Network Design",
+      "Routing and Switching",
+      "Firewall Management",
+      "VPN",
+      "Network Monitoring",
+      "Cisco/Juniper Devices",
+      "TCP/IP",
+      "Wireshark",
+      "Cloud Networking (AWS, Azure)"
+    ]
+  },
+  "AI Engineer": {
+    "title": "AI Engineer",
+    "skills": [
+      "Python",
+      "Machine Learning",
+      "Deep Learning",
+      "Natural Language Processing (NLP)",
+      "Computer Vision",
+      "TensorFlow",
+      "PyTorch",
+      "Model Deployment",
+      "Data Preprocessing",
+      "Cloud AI Services (AWS, GCP, Azure)"
+    ]
+  },
+  "Technical Writer": {
+    "title": "Technical Writer",
+    "skills": [
+      "Technical Documentation",
+      "API Documentation",
+      "User Manuals",
+      "Content Management Systems (CMS)",
+      "Markdown",
+      "Version Control (Git)",
+      "Communication Skills",
+      "Attention to Detail"
+    ]
+  },
+  "Scrum Master": {
+    "title": "Scrum Master",
+    "skills": [
+      "Agile Methodologies",
+      "Scrum Framework",
+      "Facilitation Skills",
+      "Conflict Resolution",
+      "JIRA",
+      "Sprint Planning",
+      "Retrospectives",
+      "Team Coaching"
+    ]
+  },
+  "Database Administrator (DBA)": {
+    "title": "Database Administrator (DBA)",
+    "skills": [
+      "SQL Server",
+      "PostgreSQL",
+      "MySQL",
+      "Oracle DB",
+      "Database Design",
+      "Performance Tuning",
+      "Backup and Recovery",
+      "Replication",
+      "Security",
+      "Scripting"
+    ]
+  },
+  "Product Manager": {
+    "title": "Product Manager",
+    "skills": [
+      "Agile Methodologies (Scrum, Kanban)",
+      "Roadmap Planning",
+      "User Stories",
+      "Jira",
+      "Market Research",
+      "A/B Testing",
+      "Data Analysis",
+      "Stakeholder Management",
+      "System Design Concepts"
+    ]
+  },
+  "Site Reliability Engineer (SRE)": {
+    "title": "Site Reliability Engineer (SRE)",
+    "skills": [
+      "Kubernetes",
+      "Docker",
+      "Linux",
+      "Monitoring (Prometheus, Grafana)",
+      "Automation (Python, Go, Bash)",
+      "Networking",
+      "Cloud (AWS, GCP, Azure)",
+      "Terraform",
+      "Incident Management",
+      "SLO/SLI"
+    ]
+  },
+  "Blockchain Developer": {
+    "title": "Blockchain Developer",
+    "skills": [
+      "Solidity",
+      "Ethereum",
+      "Web3.js",
+      "Ethers.js",
+      "Smart Contracts",
+      "Cryptography",
+      "Node.js",
+      "Truffle",
+      "Hardhat"
+    ]
+  },
+  "Game Developer": {
+    "title": "Game Developer",
+    "skills": [
+      "C++",
+      "C#",
+      "Unity",
+      "Unreal Engine",
+      "Game Physics",
+      "3D Graphics",
+      "Linear Algebra",
+      "Blender/Maya",
+      "Game Design Principles"
+    ]
+  },
+  "Solutions Architect": {
+    "title": "Solutions Architect",
+    "skills": [
+      "Cloud Architecture (AWS, Azure, GCP)",
+      "System Design",
+      "Networking",
+      "Security",
+      "Microservices",
+      "Database Design (SQL, NoSQL)",
+      "DevOps Principles",
+      "Cost Management",
+      "Stakeholder Communication"
+    ]
+  },
+  "IT Support Specialist": {
+    "title": "IT Support Specialist",
+    "skills": [
+      "Troubleshooting",
+      "Customer Service",
+      "Windows/Linux/Mac OS",
+      "Networking Basics",
+      "Active Directory",
+      "Remote Support Tools",
+      "Ticketing Systems (JIRA, ServiceNow)",
+      "Hardware Knowledge"
+    ]
+  },
+  "Digital Marketing Specialist": {
+    "title": "Digital Marketing Specialist",
+    "skills": [
+      "SEO",
+      "SEM",
+      "Google Analytics",
+      "Content Marketing",
+      "Social Media Marketing",
+      "Email Marketing",
+      "PPC Advertising",
+      "Marketing Automation Tools (HubSpot, Marketo)"
+    ]
+  },
+  "Cloud Security Engineer": {
+    "title": "Cloud Security Engineer",
+    "skills": [
+      "Cloud Platforms (AWS, Azure, GCP)",
+      "IAM (Identity and Access Management)",
+      "Network Security",
+      "Encryption",
+      "Compliance (GDPR, HIPAA)",
+      "Security Monitoring",
+      "Incident Response",
+      "DevSecOps",
+      "Vulnerability Assessment"
+    ]
+  },
+  "Embedded Systems Engineer": {
+    "title": "Embedded Systems Engineer",
+    "skills": [
+      "C/C++",
+      "Microcontrollers (ARM, AVR)",
+      "RTOS",
+      "Hardware Interfacing",
+      "Embedded Linux",
+      "Debugging Tools (JTAG, Oscilloscope)",
+      "Communication Protocols (I2C, SPI, UART)",
+      "PCB Design Basics"
+    ]
+  },
+ "BI Developer": {
+    "title": "Business Intelligence Developer",
+    "skills": [
+      "SQL",
+      "ETL",
+      "Power BI",
+      "Tableau",
+      "Data Warehousing",
+      "SSIS/SSRS",
+      "Data Modeling",
+      "Python (Pandas)"
+    ]
+  }, 
+  "UX Researcher": {
+    "title": "UX Researcher",
+    "skills": [
+      "User Interviews",
+      "Surveys",
+      "Usability Testing",
+      "Persona Creation",
+      "Journey Mapping",
+      "Data Analysis (Qualitative, Quantitative)",
+      "A/B Testing"
+    ]
+  },
+  "Interaction Designer": {
+    "title": "Interaction Designer",
+    "skills": [
+      "Wireframing",
+      "Prototyping (Figma, Principle)",
+      "Microinteractions",
+      "User Flow",
+      "Usability Testing",
+      "Information Architecture",
+      "Human-Computer Interaction (HCI)"
+    ]
+  },
+  "Penetration Tester": {
+    "title": "Penetration Tester (Ethical Hacker)",
+    "skills": [
+      "Metasploit",
+      "Burp Suite",
+      "Nmap",
+      "Kali Linux",
+      "Scripting (Python, Bash)",
+      "Network Security",
+      "Web Application Security",
+      "OSCP/CEH"
+    ]
+  },
+  "Security Architect": {
+    "title": "Security Architect",
+    "skills": [
+      "Security Frameworks (NIST, ISO 27001)",
+      "Network Security Design",
+      "Cloud Security",
+      "IAM",
+      "Cryptography",
+      "Risk Assessment",
+      "Zero Trust Architecture"
+    ]
+  },
+  "Digital Forensics Analyst": {
+    "title": "Digital Forensics Analyst",
+    "skills": [
+      "Forensic Tools (EnCase, FTK)",
+      "Incident Response",
+      "Malware Analysis",
+      "Data Recovery",
+      "Chain of Custody",
+      "File System Analysis",
+      "Memory Forensics"
+    ]
+  },
+  "Technical Project Manager": {
+    "title": "Technical Project Manager",
+    "skills": [
+      "Project Management (PMP, Agile)",
+      "Scrum",
+      "Risk Management",
+      "Jira",
+      "Stakeholder Communication",
+      "Budgeting",
+      "Resource Planning"
+    ]
+  },
+  "IT Manager": {
+    "title": "IT Manager",
+    "skills": [
+      "IT Strategy",
+      "Budgeting",
+      "Team Leadership",
+      "Vendor Management",
+      "ITIL",
+      "Project Management",
+      "Infrastructure Management"
+    ]
+  },
+  "Technical Lead (Tech Lead)": {
+    "title": "Technical Lead",
+    "skills": [
+      "System Architecture",
+      "Code Review",
+      "Mentoring",
+      "Agile",
+      "Advanced Programming",
+      "Problem Solving",
+      "CI/CD"
+    ]
+  },
+  "AR/VR Developer": {
+    "title": "AR/VR Developer",
+    "skills": [
+      "Unity",
+      "Unreal Engine",
+      "C#",
+      "C++",
+      "3D Modeling",
+      "ARKit (iOS)",
+      "ARCore (Android)",
+      "Blender"
+    ]
+  },
+  "Robotics Engineer": {
+    "title": "Robotics Engineer",
+    "skills": [
+      "ROS (Robot Operating System)",
+      "C++",
+      "Python",
+      "Control Systems",
+      "Computer Vision",
+      "SLAM",
+      "Kinematics"
+    ]
+  },
+  "Firmware Engineer": {
+    "title": "Firmware Engineer",
+    "skills": [
+      "C",
+      "C++",
+      "Embedded Linux",
+      "RTOS",
+      "Device Drivers",
+      "Microcontrollers",
+      "Debugging"
+    ]
+  },
+  "NLP Engineer": {
+    "title": "NLP Engineer",
+    "skills": [
+      "Python",
+      "NLTK",
+      "spaCy",
+      "Transformers (Hugging Face)",
+      "TensorFlow/PyTorch",
+      "Text Classification",
+      "Named Entity Recognition (NER)"
+    ]
+  },
+  "Computer Vision Engineer": {
+    "title": "Computer Vision Engineer",
+    "skills": [
+      "Python",
+      "OpenCV",
+      "Deep Learning",
+      "TensorFlow/PyTorch",
+      "Image Processing",
+      "Object Detection",
+      "CNNs"
+    ]
+  },
+  "Quantum Engineer": {
+    "title": "Quantum Engineer",
+    "skills": [
+      "Quantum Mechanics",
+      "Python",
+      "Qiskit",
+      "Cirq",
+      "Quantum Algorithms",
+      "Linear Algebra",
+      "Jupyter"
+    ]
+  },
+  "IT Consultant": {
+    "title": "IT Consultant",
+    "skills": [
+      "IT Strategy",
+      "Business Analysis",
+      "Project Management",
+      "Cloud Solutions",
+      "Cybersecurity",
+      "Stakeholder Management",
+      "Problem Solving"
+    ]
   }
 
 }
