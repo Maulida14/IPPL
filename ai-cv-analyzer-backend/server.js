@@ -25,7 +25,7 @@ const Hf = new HfInference(process.env.HF_API_KEY);
 const jobRequirement = require("./jobRequirement.json");
 
 
-// STEP 1: PARSING CV (Tidak ada perubahan)
+// STEP 1: PARSING CV 
 async function parseCV(filepath, mimetype) {
      try {
         const FormData = require("form-data");
@@ -57,7 +57,7 @@ async function parseCV(filepath, mimetype) {
     }
 }
 
-// STEP 2: JOB MATCHING (Tidak ada perubahan)
+// STEP 2: JOB MATCHING 
 async function jobMatching(cvSkills, jobSkills) {
     try {
         const text1 = cvSkills.join(", ");
@@ -79,7 +79,7 @@ async function jobMatching(cvSkills, jobSkills) {
     }
 }
 
-// MODIFIKASI: STEP 3 - Menganalisis Format CV dengan Gemini
+// STEP 3 - Menganalisis Format CV dengan Gemini
 async function analyzeCVFormat(parsedCV) {
     const cvText = parsedCV.data?.text || parsedCV.text || "";
     if (!cvText) {
@@ -115,7 +115,7 @@ async function analyzeCVFormat(parsedCV) {
     }
 }
 
-// MODIFIKASI: STEP 4 - Memberikan Saran dengan Gemini
+//STEP 4 - Memberikan Saran dengan Gemini
 async function getSuggestions(cvSkills, jobSkills, jobTitle, formatAnalysis) {
     try {
         const prompt = `Anda adalah seorang konsultan karir profesional. Analisis CV berikut untuk pekerjaan "${jobTitle}".
@@ -145,7 +145,7 @@ async function getSuggestions(cvSkills, jobSkills, jobTitle, formatAnalysis) {
 }
 
         
-// STEP 5: API ENDPOINT (Tidak ada perubahan signifikan)
+// STEP 5: API ENDPOINT 
 app.post("/api/analyze-cv", upload.single("CV"), async (req, res) => {
     const filePath = req.file.path; 
 

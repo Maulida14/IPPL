@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // === Get DOM Elements ===
+    //  === Get DOM Elements ===
     const cvForm = document.getElementById("cv-form");
     const cvFileInput = document.getElementById("cv-file");
     const fileNameDisplay = document.getElementById("file-name");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelFileBtn = document.getElementById("cancel-file");
     const resetBtn = document.getElementById("reset-btn");
 
-    // BARU: Ambil elemen select
+    // Ambil elemen select
     const jobTitleSelect = document.getElementById("job-title");
     const positions = [
         "AI Engineer",
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Backend API URL
     const API_URL = "http://localhost:3000/api/analyze-cv";
 
-    // === Event Listeners ===
+    // Event Listeners
     cvFileInput.addEventListener("change", () => {  
         if (cvFileInput.files.length > 0) {  
             fileNameDisplay.textContent = cvFileInput.files[0].name;  
@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const file = cvFileInput.files[0];
-        // MODIFIKASI: Ambil juga nilai dari job title
         const jobTitle = jobTitleSelect.value;
 
         if (!jobTitle) {
@@ -120,9 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const formData = new FormData();
-        // MODIFIKASI: Tambahkan kedua data ke FormData
         formData.append("CV", file);
-        formData.append("jobTitle", jobTitle); // Kunci 'jobTitle' harus sesuai dengan backend
+        formData.append("jobTitle", jobTitle);
 
         setLoadingState(true);
 
@@ -195,7 +193,43 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSkillList(matchedSkillsList, data.matchedSkills, "Semua skill yang dibutuhkan cocok!");
     updateSkillList(missingSkillsList, data.missingSkills, "Tidak ada skill yang kurang.");
 
-    suggestionsText.textContent = data.suggestions;
+    // Format dan tampilkan saran perbaikan dengan tampilan list rapi
+        const suggestionsContainer = document.querySelector(".suggestions-card");
+        const suggestionsText = document.getElementById("suggestions-text");
+        suggestionsText.innerHTML = ""; 
+
+        // Pastikan kita punya teks saran
+        const raw = (data.suggestions || "").toString();
+        if (!raw.trim()) {
+            suggestionsText.textContent = "Tidak ada saran khusus yang perlu diperbaiki.";
+        } else {
+            // Split berdasarkan baris, atau pisah jika ada tanda bullet/nomor
+            let lines = raw.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
+            if (lines.length === 1) {
+                // kalau hanya satu baris, coba split berdasarkan tanda '-', '*' atau nomor
+                lines = raw.split(/\s*-\s+|\*|\d+\./).map(s => s.trim()).filter(s => s.length > 0);
+            }
+
+            const ul = document.createElement("ul");
+            ul.classList.add("suggestions-list");
+
+            lines.forEach(point => {
+            // Hapus semua karakter bullet 
+                const cleaned = point
+                .replace(/^[\s\*\uFF0A\u2217\-\u2022\u2013\u2014\d\.\)]+/, '') // hapus simbol bullet di awal
+                .replace(/\*\*/g, '') // hapus bintang ganda markdown
+                .replace(/\*/g, '')   // hapus bintang tunggal sisa
+                .trim();
+
+                const li = document.createElement("li");
+                li.textContent = cleaned;
+                li.classList.add("suggestion-item");
+                ul.appendChild(li);
+            });
+
+
+            suggestionsText.appendChild(ul);
+        }
 
     resultsContainer.classList.remove("hidden");
 
@@ -214,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("file-name").textContent = "";
             resetBtn.classList.add("hidden");
         });
-}
+    }
     }
 
     function updateSkillList(listElement, skills, emptyMessage) {
@@ -234,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// === Interaksi Modal Panduan Pengguna ===
+// Interaksi Modal Panduan Pengguna
 document.addEventListener("DOMContentLoaded", () => {
     const btnPanduan = document.getElementById("btn-panduan");
     const modalPanduan = document.getElementById("modal-panduan");

@@ -281,7 +281,34 @@ select#job-title {
     font-family: 'Poppins', sans-serif;
 }
 
-/* === Panduan Pengguna Modal === */
+/* Daftar saran perbaikan */
+.suggestion-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.suggestion-item {
+  background: #f8f9fa;
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  border-left: 4px solid #6c63ff;
+  border-radius: 6px;
+  line-height: 1.5;
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: #eef0ff;
+}
+
+.suggestions-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* Panduan Pengguna Modal */
 .btn-panduan {
     background-color: #eef3ff;
     color: #004aad;
@@ -352,7 +379,7 @@ select#job-title {
     from { transform: translateY(-20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-/* = Animasi Kemunculan =*/
+/* Animasi Kemunculan */
 .fade-in {
   opacity: 0;
   transform: translateY(15px);
