@@ -118,13 +118,17 @@ async function analyzeCVFormat(parsedCV) {
 //STEP 4 - Memberikan Saran dengan Gemini
 async function getSuggestions(cvSkills, jobSkills, jobTitle, formatAnalysis) {
     try {
-        const prompt = `Anda adalah seorang konsultan karir profesional. Analisis CV berikut untuk pekerjaan "${jobTitle}".
+        const prompt = `Analisis CV untuk posisi "${jobTitle}".
         - Skills kandidat: ${cvSkills.join(", ")}.
-        - Skills yang dibutuhkan: ${jobSkills.join(", ")}.
-        - Analisis Format: CV ini diidentifikasi sebagai gaya ${formatAnalysis.style} karena ${formatAnalysis.reason}.
+        - Skills dibutuhkan: ${jobSkills.join(", ")}.
+        - Format CV: gaya ${formatAnalysis.style}, karena ${formatAnalysis.reason}.
 
-        Berikan 3-4 poin saran perbaikan yang singkat, jelas, dan actionable dalam format bullet points. Jika format CV tidak sesuai untuk target audiens (misal: gaya Eropa dengan foto untuk lamaran di AS), berikan saran tentang itu. Jawab dalam Bahasa Indonesia.`;
+        Berikan saran perbaikan yang:
+        - sangat singkat (maks 1-2 kalimat), langsung ke poin, dan actionable, tanpa penjelasan panjang lebar,
+        - jika format cv tidak cocok dengan standar industri/negara, beri 1poin khudus tentang itu.
 
+        Gunakan kalimat yang mudah dipahami dan jawab dalam Bahasa Indonesia.
+        `;
             const result = await geminiModel.generateContent(prompt);
             const response = await result.response;
             return response.text();

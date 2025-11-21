@@ -98,7 +98,8 @@
       "AWS",
       "Azure",
       "Linux",
-      "Scripting (Bash/Python)"
+      "Bash",
+      "Python"
     ]
   },
   "Cybersecurity Analyst": {
@@ -204,10 +205,12 @@
       "Firewall Management",
       "VPN",
       "Network Monitoring",
-      "Cisco/Juniper Devices",
+      "Cisco",
+      "Juniper Devices",
       "TCP/IP",
       "Wireshark",
-      "Cloud Networking (AWS, Azure)"
+      "AWS", 
+      "Azure"
     ]
   },
   "AI Engineer": {
@@ -326,7 +329,9 @@
   "Solutions Architect": {
     "title": "Solutions Architect",
     "skills": [
-      "Cloud Architecture (AWS, Azure, GCP)",
+      "AWS",
+      "Azure",
+      "GCP",
       "System Design",
       "Networking",
       "Security",
@@ -342,7 +347,9 @@
     "skills": [
       "Troubleshooting",
       "Customer Service",
-      "Windows/Linux/Mac OS",
+      "Windows",
+      "Linux",
+      "Mac OS",
       "Networking Basics",
       "Active Directory",
       "Remote Support Tools",
@@ -419,7 +426,9 @@
     "title": "Interaction Designer",
     "skills": [
       "Wireframing",
-      "Prototyping (Figma, Principle)",
+      "Prototyping",
+      "Figma", 
+      "Principle",
       "Microinteractions",
       "User Flow",
       "Usability Testing",
@@ -434,7 +443,9 @@
       "Burp Suite",
       "Nmap",
       "Kali Linux",
-      "Scripting (Python, Bash)",
+      "Scripting",
+      "Python", 
+      "Bash",
       "Network Security",
       "Web Application Security",
       "OSCP/CEH"
@@ -467,7 +478,9 @@
   "Technical Project Manager": {
     "title": "Technical Project Manager",
     "skills": [
-      "Project Management (PMP, Agile)",
+      "Project Management",
+      "PMP", 
+      "Agile",
       "Scrum",
       "Risk Management",
       "Jira",
@@ -543,8 +556,9 @@
       "Python",
       "NLTK",
       "spaCy",
-      "Transformers (Hugging Face)",
-      "TensorFlow/PyTorch",
+      "Transformers",
+      "TensorFlow",
+      "PyTorch",
       "Text Classification",
       "Named Entity Recognition (NER)"
     ]
@@ -555,7 +569,8 @@
       "Python",
       "OpenCV",
       "Deep Learning",
-      "TensorFlow/PyTorch",
+      "TensorFlow",
+      "PyTorch",
       "Image Processing",
       "Object Detection",
       "CNNs"
@@ -583,6 +598,34 @@
       "Cybersecurity",
       "Stakeholder Management",
       "Problem Solving"
+    ]
+  },
+  "Software Engineer": {
+    "title": "Software Engineer",
+    "skills": [
+      "Java", 
+      "C++", 
+      "Python",
+      "Data Structures and Algorithms",
+      "System Design",
+      "Git",
+      "Testing and Debugging",
+      "Agile Methodologies",
+      "CI/CD"
+    ]
+  },
+  "Data Analyst": {
+    "title": "Data Analyst",
+    "skills": [
+      "SQL",
+      "Excel",
+      "Python",
+      "R",
+      "Tableau", 
+      "Power BI",
+      "Statistical Analysis",
+      "Data Cleaning",
+      "ETL Processes"
     ]
   }
 

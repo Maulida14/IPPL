@@ -56,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Technical Project Manager",
         "Technical Writer",
         "UI/UX Designer",
-        "UX Researcher"
+        "UX Researcher",
+        "Data Analyst"
     ];
     positions.sort();
 
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const file = cvFileInput.files[0];
-        const jobTitle = jobTitleSelect.value;
+        const jobTitle = $('#job-title').val();
 
         if (!jobTitle) {
             showError("Silakan pilih posisi pekerjaan terlebih dahulu.");
@@ -239,16 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Tampilkan tombol reset
-    document.getElementById("reset-btn").classList.remove("hidden");
-    if (resetBtn) {
-        resetBtn.addEventListener("click", () => {
-            document.getElementById("results-container").classList.add("hidden");
-            document.getElementById("error-message").classList.add("hidden");
-            document.getElementById("cv-form").reset();
-            document.getElementById("file-name").textContent = "";
-            resetBtn.classList.add("hidden");
-        });
-    }
+    resetBtn.classList.remove("hidden");
     }
 
     function updateSkillList(listElement, skills, emptyMessage) {
@@ -266,10 +258,39 @@ document.addEventListener("DOMContentLoaded", () => {
             listElement.appendChild(li);
         }
     }
-});
+    // Tombol Reset
+    resetBtn.addEventListener("click", () => {
+        // Reset form
+        cvForm.reset();
+
+        // Reset upload file
+        fileNameDisplay.textContent = "";
+        cvFileInput.value = "";
+        cancelFileBtn.classList.add("hidden");
+
+        // Reset select2
+        $("#job-title").val(null).trigger("change");
+
+        // Sembunyikan hasil & error
+        resultsContainer.classList.add("hidden");
+        errorMessage.classList.add("hidden");
+
+        // Reset score
+        scoreValue.textContent = "0%";
+        scoreCircle.style.setProperty("--p", 0);
+
+        // Kosongkan list skill & saran
+        matchedSkillsList.innerHTML = "";
+        missingSkillsList.innerHTML = "";
+        suggestionsText.innerHTML = "";
+
+        // Sembunyikan tombol reset kembali
+        resetBtn.classList.add("hidden");
+
+        console.log("Form berhasil direset lengkap.");
+    });
 
 // Interaksi Modal Panduan Pengguna
-document.addEventListener("DOMContentLoaded", () => {
     const btnPanduan = document.getElementById("btn-panduan");
     const modalPanduan = document.getElementById("modal-panduan");
     const closeBtn = document.querySelector(".close");

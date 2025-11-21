@@ -92,11 +92,12 @@
                         <option value="Computer Vision Engineer">Computer Vision Engineer</option>
                         <option value="Quantum Engineer">Quantum Engineer</option>
                         <option value="IT Consultant">IT Consultant</option>
+                        <option value="Data Analyst">Data Analyst</option>
                     </select>
                 </div>
                 
                 <div class="file-upload-wrapper">
-                    <input type="file" id="cv-file" name="CV" accept=".pdf,.docx" required>
+                    <input type="file" id="cv-file" name="CV" accept=".pdf,.docx">
                     <label for="cv-file" class="file-upload-label">
                         <span>Pilih File CV...</span>
                     </label>
@@ -104,6 +105,7 @@
                     <button type="button" id="cancel-file" class="cancel-file hidden">✖</button>
                 </div>
                 <button type="submit" id="analyze-btn">Analisis CV Saya</button>
+                <div id="error-message" class="hidden"></div>
             </form>
 
             <div id="loader" class="hidden">
@@ -111,7 +113,7 @@
                 <p>Menganalisis CV Anda, mohon tunggu...</p>
             </div>
 
-            <div id="error-message" class="hidden"></div>
+            <!-- <div id="error-message" class="hidden"></div> -->
 
             <section id="results-container" class="hidden fade-in">
                 <h2>Hasil Analisis</h2>
