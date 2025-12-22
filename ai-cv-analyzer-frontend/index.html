@@ -16,8 +16,16 @@
 </head>
 <body>
     <div class="container">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+            <span style="margin-left: 10px; font-weight: 600;">Mode Gelap</span>
+        </div>
         <header>
-            <h1>📄 AI CV Analyzer</h1>
+            <h1>
+                📝 AI CV Analyzer</h1>
             <p>Unggah CV Anda (PDF atau DOCX) untuk mendapatkan skor kecocokan dengan pekerjaan, analisis skill, dan saran perbaikan.</p>
             <button id="btn-panduan" class="btn-panduan">📘 Panduan Pengguna</button>
         </header>
@@ -28,7 +36,7 @@
                 <h2>Panduan Pengguna</h2>
                 <ol>
                     <li>Pilih posisi pekerjaan yang ingin dianalisis.</li>
-                    <li>Unggah file CV dalam format PDF atau DOCX.</li>
+                    <li>Unggah file CV dalam format PDF atau DOCX (Text-based).</li>
                     <li>Klik tombol <b>“Analisis CV Saya”</b>.</li>
                     <li>Tunggu hingga hasil analisis muncul yang mencakup:
                         <ul>
@@ -97,9 +105,10 @@
                 </div>
                 
                 <div class="file-upload-wrapper">
+                    <span class="upload-note">*text based</span>
                     <input type="file" id="cv-file" name="CV" accept=".pdf,.docx">
                     <label for="cv-file" class="file-upload-label">
-                        <span>Pilih File CV...</span>
+                        <span>Pilih File CV atau Drag & Drop disini...</span>
                     </label>
                     <span id="file-name" class="file-name-display"></span>
                     <button type="button" id="cancel-file" class="cancel-file hidden">✖</button>
@@ -112,8 +121,6 @@
                 <div class="spinner"></div>
                 <p>Menganalisis CV Anda, mohon tunggu...</p>
             </div>
-
-            <!-- <div id="error-message" class="hidden"></div> -->
 
             <section id="results-container" class="hidden fade-in">
                 <h2>Hasil Analisis</h2>

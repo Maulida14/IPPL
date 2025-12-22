@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer = document.getElementById("results-container");
     const cancelFileBtn = document.getElementById("cancel-file");
     const resetBtn = document.getElementById("reset-btn");
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');   
+    const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 
     // Ambil elemen select
     const jobTitleSelect = document.getElementById("job-title");
@@ -83,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const suggestionsText = document.getElementById("suggestions-text");
 
     // Backend API URL
-    const API_URL = "http://localhost:3000/api/analyze-cv";
+    const API_URL = "https://ippl-production.up.railway.app/api/analyze-cv";
 
     // Event Listeners
     cvFileInput.addEventListener("change", () => {  
@@ -95,6 +98,33 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelFileBtn?.classList.add("hidden");  
         }  
         });
+
+    fileUploadWrapper.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.classList.add("dragover");
+    });
+
+    fileUploadWrapper.addEventListener("dragleave", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.classList.remove("dragover");
+    });
+
+    fileUploadWrapper.addEventListener("drop", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.classList.remove("dragover");
+
+        const droppedFiles = e.dataTransfer.files;
+
+        if (droppedFiles.length > 0) {
+            cvFileInput.files = droppedFiles;
+
+            const event = new Event('change');
+            cvFileInput.dispatchEvent(event);
+        }
+    });
 
     if (cancelFileBtn) {
         cancelFileBtn.addEventListener("click", () => {
@@ -308,5 +338,23 @@ document.addEventListener("DOMContentLoaded", () => {
             modalPanduan.classList.add("hidden");
         }
     });
-});
+    // 1. Cek local storage saat load
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+    }
+}
 
+// 2. Event Listener untuk Switch
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }
+}
+toggleSwitch.addEventListener('change', switchTheme);
+});
