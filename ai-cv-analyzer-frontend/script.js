@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (data.score >= 50) scoreColor = '#ffc107';
     scoreCircle.style.setProperty('--c', scoreColor);
 
-    updateSkillList(matchedSkillsList, data.matchedSkills, "Semua skill yang dibutuhkan cocok!");
+    updateSkillList(matchedSkillsList, data.matchedSkills, "Semua skill yang di butuhkan tidak ditemukan!");
     updateSkillList(missingSkillsList, data.missingSkills, "Tidak ada skill yang kurang.");
 
     // Format dan tampilkan saran perbaikan dengan tampilan list rapi
