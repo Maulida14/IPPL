@@ -152,6 +152,25 @@ async function getSuggestions(cvSkills, jobSkills, jobTitle, formatAnalysis) {
     }
 }
 
+// Fungsi untuk memvalidasi apakah teks yang diekstrak adalah CV
+async function validateIsCV(text) {
+    try {
+        const prompt = `Periksa teks berikut secara ketat. Apakah ini merupakan isi dari sebuah Curriculum Vitae (CV) atau Resume profesional? 
+        Jawab HANYA dengan satu kata: "YA" (jika benar CV) atau "TIDAK" (jika bukan CV/file sembarang).
+        
+        Teks: """${text.substring(0, 1000)}"""`;
+
+        const result = await geminiModel.generateContent(prompt);
+        const responseText = result.response.text().trim().toUpperCase();
+        
+        // Mengembalikan true jika AI menjawab YA
+        return responseText.includes("YA");
+    } catch (err) {
+        // Fallback sederhana jika AI gagal: cek kata kunci wajib CV
+        const keywords = ["pendidikan", "pengalaman", "keahlian", "education", "experience", "skills", "riwayat"];
+        return keywords.some(word => text.toLowerCase().includes(word));
+    }
+}
         
 // STEP 5: API ENDPOINT 
 app.post("/api/analyze-cv", upload.single("CV"), async (req, res) => {
@@ -166,6 +185,15 @@ app.post("/api/analyze-cv", upload.single("CV"), async (req, res) => {
         const selectedJob = jobRequirement[jobTitle];
         const jobSkills = selectedJob.skills;
         const parsed = await parseCV(req.file.path, req.file.mimetype);
+        const cvText = parsed.text || (parsed.data ? parsed.data.text : "");
+
+        const isCV = await validateIsCV(cvText);
+        if (!isCV) {
+            return res.status(400).json({ 
+                error: "File yang Anda unggah tidak terdeteksi sebagai CV. Mohon unggah dokumen resume yang valid." 
+            });
+        }  
+
         let cvSkills = [];
 
         if (parsed.data && parsed.data.skills) {
