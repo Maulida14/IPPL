@@ -320,16 +320,68 @@ select#job-title {
 /* Score Circle */
 @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
 .score-circle {
-    width: 150px; height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     margin: auto;
-    display: flex; justify-content: center; align-items: center;
-    font-size: 1.8rem; font-weight: 700;
-    background: 
-        radial-gradient(circle, var(--card-background) 60%, transparent 61%),
-        conic-gradient(var(--c) calc(var(--p)*1%), var(--border-color) 0);
-    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 700;
+    position: relative;
+
+    background:
+    radial-gradient(circle at center, var(--card-background) 58%, transparent 60%),
+    conic-gradient(
+        var(--c) calc(var(--p) * 1%),
+        var(--border-color) 0
+    );
+
+
+    transition: transform 0.4s ease;
+    animation: popIn 0.6s ease;
 }
+
+/* Glow */
+.score-circle::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(108,99,255,0.6),
+        rgba(75,123,236,0.6),
+        rgba(32,201,151,0.6)
+    );
+    filter: blur(18px);
+    opacity: 0.6;
+    z-index: -1;
+}
+
+/* Pulse ketika skor tinggi */
+.score-circle.high {
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 
 /* Skills List */
 .skills-section h4 {
