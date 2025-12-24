@@ -310,16 +310,21 @@ select#job-title {
 }
 
 .score-card, .details-card, .suggestions-card {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
     background-color: var(--card-background);
     padding: 25px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    color: var(--text-color);
+    color: #f1c40f; 
 }
 
 /* Score Circle */
 @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
 .score-circle {
+    color: #f1c40f;
+    font-weight: 800;
     width: 160px;
     height: 160px;
     border-radius: 50%;
@@ -328,7 +333,6 @@ select#job-title {
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    font-weight: 700;
     position: relative;
 
     background:
@@ -385,14 +389,16 @@ select#job-title {
 
 /* Skills List */
 .skills-section h4 {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 5px;
 }
 .skills-section ul {
+    margin-bottom: 22px;
     list-style: none; display: flex; flex-wrap: wrap; gap: 10px;
 }
 .skills-section li {
+    margin-bottom: 20px;
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 0.9em;
