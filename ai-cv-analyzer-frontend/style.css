@@ -414,7 +414,6 @@ select#job-title {
     text-align: left;
 }
 .skills-section ul {
-    margin-bottom: 22px;
     list-style: none; display: flex; flex-wrap: wrap; gap: 10px;
 }
 .skills-section li {
