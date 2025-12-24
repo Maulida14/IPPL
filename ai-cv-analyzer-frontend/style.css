@@ -316,7 +316,7 @@ select#job-title {
     border: 1px solid var(--border-color);
     color: var(--text-color);
     margin-bottom: 20px;
-    color: #f1c40f; 
+    color: #ffe375; 
 }
 
 .score-card {
@@ -335,12 +335,17 @@ select#job-title {
     text-align: center;
 }
 
+.suggestions-card {
+    text-align: center;
+}
+
+
 
 
 /* Score Circle */
 @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
 .score-circle {
-    color: #f1c40f;
+    color: #ffe375;
     font-weight: 800;
     width: 160px;
     height: 160px;
@@ -409,6 +414,7 @@ select#job-title {
     margin-bottom: 12px;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 5px;
+    text-align: left;
 }
 .skills-section ul {
     margin-bottom: 22px;
@@ -429,6 +435,7 @@ select#job-title {
 /* Suggestions */
 .suggestion-item {
     background: var(--input-bg);
+    margin-top: 8px;
     margin-bottom: 8px;
     padding: 10px 14px;
     border-left: 4px solid #6c63ff;
