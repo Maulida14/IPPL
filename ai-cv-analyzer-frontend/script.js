@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const suggestionsText = document.getElementById("suggestions-text");
 
     // Backend API URL
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
     const API_URL = "https://ippl-production.up.railway.app/api/analyze-cv";
 
     // Event Listeners
@@ -97,20 +98,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (fileExtension !== 'pdf' && fileExtension !== 'docx') {
             showError("Format file tidak didukung! Mohon unggah file dalam format PDF atau DOCX.");
-            cvFileInput.value = "";
-            fileNameDisplay.textContent = "";
-            cancelFileBtn?.classList.add("hidden");
+            resetInputFile();
+            return;
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+            showError("Ukuran file terlalu besar! Maksimal ukuran file adalah 10MB.");
+            resetInputFile();
             return;
         }
 
         fileNameDisplay.textContent = fileName;  
         cancelFileBtn?.classList.remove("hidden"); 
         errorMessage.classList.add("hidden");
-    } else {  
-        fileNameDisplay.textContent = "";  
-        cancelFileBtn?.classList.add("hidden");  
-    }  
-    });
+    }
+});
+
+function resetInputFile() {
+    cvFileInput.value = "";
+    fileNameDisplay.textContent = "";
+    cancelFileBtn?.classList.add("hidden");
+}
 
     fileUploadWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();

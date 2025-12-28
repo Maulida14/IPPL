@@ -21,7 +21,18 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ 
+    dest: "uploads/",
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype === "application/pdf" || 
+            file.mimetype === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+            cb(null, true);
+        } else {
+            cb(new Error("Format file tidak didukung! Hanya PDF dan DOCX."), false);
+        }
+    }
+});
 const PORT = process.env.PORT || 3000;
 
 // API Keys & Config
@@ -163,7 +174,6 @@ async function validateIsCV(text) {
         const result = await geminiModel.generateContent(prompt);
         const responseText = result.response.text().trim().toUpperCase();
         
-        // Mengembalikan true jika AI menjawab YA
         return responseText.includes("YA");
     } catch (err) {
         // Fallback sederhana jika AI gagal: cek kata kunci wajib CV
@@ -173,67 +183,78 @@ async function validateIsCV(text) {
 }
         
 // STEP 5: API ENDPOINT 
-app.post("/api/analyze-cv", upload.single("CV"), async (req, res) => {
-    const filePath = req.file.path; 
-
-    try {
-         const { jobTitle } = req.body;
-        if (!jobTitle || !jobRequirement[jobTitle]) {
-            return res.status(400).json({ error: "Posisi tidak dipilih." });
+app.post("/api/analyze-cv", (req, res) => {
+    upload.single("CV")(req, res, async (err) => {
+        if (err) {
+            if (err.code === "LIMIT_FILE_SIZE") {
+                return res.status(400).json({ 
+                    error: "File terlalu besar! Maksimal ukuran file adalah 10MB." 
+                });
+            }
+            return res.status(400).json({ error: err.message });
         }
 
-        const selectedJob = jobRequirement[jobTitle];
-        const jobSkills = selectedJob.skills;
-        const parsed = await parseCV(req.file.path, req.file.mimetype);
-        const cvText = parsed.text || (parsed.data ? parsed.data.text : "");
+        if (!req.file) {
+            return res.status(400).json({ error: "Mohon unggah file CV Anda." });
+        }
 
-        const isCV = await validateIsCV(cvText);
-        if (!isCV) {
-            return res.status(400).json({ 
-                error: "File yang Anda unggah tidak terdeteksi sebagai CV. Mohon unggah dokumen resume yang valid." 
+        const filePath = req.file.path; 
+
+        try {
+            const { jobTitle } = req.body;
+            if (!jobTitle || !jobRequirement[jobTitle]) {
+                return res.status(400).json({ error: "Posisi tidak dipilih atau tidak valid." });
+            }
+
+            const selectedJob = jobRequirement[jobTitle];
+            const jobSkills = selectedJob.skills;
+
+            const parsed = await parseCV(req.file.path, req.file.mimetype);
+            const cvText = parsed.text || (parsed.data ? parsed.data.text : "");
+
+            const isCV = await validateIsCV(cvText);
+            if (!isCV) {
+                return res.status(400).json({ 
+                    error: "File yang Anda unggah tidak terdeteksi sebagai CV. Mohon unggah dokumen resume yang valid." 
+                });
+            }  
+
+            let cvSkills = [];
+            if (parsed.data && parsed.data.skills) {
+                cvSkills = parsed.data.skills.map((s) => s.name);
+            } else if (parsed.text) {
+                const allPossibleSkills = [...new Set(Object.values(jobRequirement).flatMap(j => j.skills))];
+                const cvTextLower = parsed.text.toLowerCase();
+                cvSkills = allPossibleSkills.filter(skill => cvTextLower.includes(skill.toLowerCase()));
+            }
+
+            if (cvSkills.length === 0) {
+                return res.status(400).json({ error: "Tidak ada skill yang terdeteksi di dalam CV. Mohon perbarui CV Anda." });
+            }
+
+            const formatAnalysis = await analyzeCVFormat(parsed);
+            const score = await jobMatching(cvSkills, jobSkills);
+            const suggestions = await getSuggestions(cvSkills, jobSkills, selectedJob.title, formatAnalysis);
+
+            res.json({
+                score,
+                formatAnalysis,
+                matchedSkills: cvSkills.filter((s) => jobSkills.includes(s)),
+                missingSkills: jobSkills.filter((s) => !cvSkills.includes(s)),
+                suggestions,
             });
-        }  
 
-        let cvSkills = [];
-
-        if (parsed.data && parsed.data.skills) {
-            cvSkills = parsed.data.skills.map((s) => s.name);
-        } 
-        else if (parsed.text) {
-        const allPossibleSkills = [...new Set(Object.values(jobRequirement).flatMap(j => j.skills))];
-            const cvText = parsed.text.toLowerCase();
-            cvSkills = allPossibleSkills.filter(skill => cvText.includes(skill.toLowerCase()));
-        } 
-        else {
-            cvSkills = [];
+        } catch (error) {
+            console.error("Terjadi error pada proses analisis:", error);
+            res.status(500).json({ error: "Terjadi kesalahan internal pada server." });
+        } finally {
+            if (filePath && fs.existsSync(filePath)) {
+                fs.unlink(filePath, (unlinkErr) => {
+                    if (unlinkErr) console.error("Gagal menghapus file sementara:", unlinkErr);
+                });
+            }
         }
-
-        if (cvSkills.length === 0) {
-            return res.status(400).json({ error: "Tidak ada skill yang terdeteksi di dalam CV. Mohon perbarui CV Anda." });
-        }
-
-        const formatAnalysis = await analyzeCVFormat(parsed);
-        const score = await jobMatching(cvSkills, jobSkills);
-        const suggestions = await getSuggestions(cvSkills, jobSkills, selectedJob.title, formatAnalysis);
-
-        res.json({
-            score,
-            formatAnalysis,
-            matchedSkills: cvSkills.filter((s) => jobSkills.includes(s)),
-            missingSkills: jobSkills.filter((s) => !cvSkills.includes(s)),
-            suggestions,
-        });
-    } catch (err) {
-        console.error("Terjadi error pada proses analisis:", err);
-        res.status(500).json({ error: "Terjadi kesalahan internal pada server." });
-    } finally {
-        if (filePath) {
-            fs.unlink(filePath, (unlinkErr) => {
-                if (unlinkErr) console.error("Gagal menghapus file sementara:", unlinkErr);
-                else console.log("File sementara berhasil dihapus:", filePath);
-            });
-        }
-    }
+    });
 });
 
 // STEP 6: SERVER STATUS
