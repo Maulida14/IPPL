@@ -90,14 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event Listeners
     cvFileInput.addEventListener("change", () => {  
-        if (cvFileInput.files.length > 0) {  
-            fileNameDisplay.textContent = cvFileInput.files[0].name;  
-            cancelFileBtn?.classList.remove("hidden"); 
-        } else {  
-            fileNameDisplay.textContent = "";  
-            cancelFileBtn?.classList.add("hidden");  
-        }  
-        });
+    if (cvFileInput.files.length > 0) {  
+        const file = cvFileInput.files[0];
+        const fileName = file.name;
+        const fileExtension = fileName.split('.').pop().toLowerCase();
+
+        if (fileExtension !== 'pdf' && fileExtension !== 'docx') {
+            showError("Format file tidak didukung! Mohon unggah file dalam format PDF atau DOCX.");
+            cvFileInput.value = "";
+            fileNameDisplay.textContent = "";
+            cancelFileBtn?.classList.add("hidden");
+            return;
+        }
+
+        fileNameDisplay.textContent = fileName;  
+        cancelFileBtn?.classList.remove("hidden"); 
+        errorMessage.classList.add("hidden");
+    } else {  
+        fileNameDisplay.textContent = "";  
+        cancelFileBtn?.classList.add("hidden");  
+    }  
+    });
 
     fileUploadWrapper.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -112,19 +125,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     fileUploadWrapper.addEventListener("drop", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        fileUploadWrapper.classList.remove("dragover");
+    e.preventDefault();
+    e.stopPropagation();
+    fileUploadWrapper.classList.remove("dragover");
 
-        const droppedFiles = e.dataTransfer.files;
+    const droppedFiles = e.dataTransfer.files;
 
-        if (droppedFiles.length > 0) {
-            cvFileInput.files = droppedFiles;
+    if (droppedFiles.length > 0) {
+        const file = droppedFiles[0];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
 
-            const event = new Event('change');
-            cvFileInput.dispatchEvent(event);
+        // Validate dropped file extension
+        if (fileExtension !== 'pdf' && fileExtension !== 'docx') {
+            showError("Format file tidak didukung! Mohon unggah file dalam format PDF atau DOCX.");
+            return;
         }
-    });
+
+        cvFileInput.files = droppedFiles;
+        const event = new Event('change');
+        cvFileInput.dispatchEvent(event);
+    }
+    });     
 
     if (cancelFileBtn) {
         cancelFileBtn.addEventListener("click", () => {
