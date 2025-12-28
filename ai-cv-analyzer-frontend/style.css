@@ -276,6 +276,25 @@ select#job-title {
     animation: fadeIn 0.3s ease;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
+.modal-content ol {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.modal-content ol li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.modal-content ol li ul {
+    list-style-type: circle; 
+    padding-left: 25px;      
+    margin-top: 8px;
+}
+
+.modal-content ol li ul li {
+    margin-bottom: 5px;      
+}
 
 .close {
     float: right; font-size: 24px; cursor: pointer; color: var(--text-color);
