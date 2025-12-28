@@ -279,23 +279,26 @@ select#job-title {
 }
 
 .modal-content ol {
-    padding-left: 25px;
-    margin-top: 15px 0;
+    padding-left: 25px; 
+    margin-top: 15px;
 }
 
 .modal-content ol li {
     margin-bottom: 10px;
+    line-height: 1.6;
 }
 
 .modal-content ol li ul {
     list-style-type: circle; 
-    padding-left: 20px !important;      
+    padding-left: 30px !important; 
     margin-top: 8px;     
     margin-bottom: 5px;   
+    display: block; 
 }
 
 .modal-content ol li ul li {
-    margin-bottom: 5px;      
+    margin-bottom: 5px;
+    display: list-item; 
 }
 
 .close {

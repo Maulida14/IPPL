@@ -369,12 +369,12 @@ function resetInputFile() {
         }
     });
 
-    
+
 if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
     if (currentTheme === 'dark') {
         toggleSwitch.checked = true;
-        themeText.textContent = "Mode Terang"; 
+        themeText.textContent = "switch to light mode"; 
     }
 }
 
