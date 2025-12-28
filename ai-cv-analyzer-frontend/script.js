@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const resetBtn = document.getElementById("reset-btn");
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');   
+    const themeText = document.getElementById('theme-text');
     const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 
     // Ambil elemen select
@@ -367,11 +368,13 @@ function resetInputFile() {
             modalPanduan.classList.add("hidden");
         }
     });
-    // 1. Cek local storage saat load
+
+    
 if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
     if (currentTheme === 'dark') {
         toggleSwitch.checked = true;
+        themeText.textContent = "Mode Terang"; 
     }
 }
 
@@ -380,9 +383,11 @@ function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+        themeText.textContent = "switch to light mode"; 
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+        themeText.textContent = "switch to dark mode"; 
     }
 }
 toggleSwitch.addEventListener('change', switchTheme);
